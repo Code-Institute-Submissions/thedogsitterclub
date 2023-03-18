@@ -1,0 +1,87 @@
+.App {
+  font-family: 'Roboto', sans-serif;
+  background-color: #4887b1;
+  min-height: 100vh;
+}
+
+.Main {
+  padding-top: 90px;
+}
+
+.Content {
+  background-color: #4887b1;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.FillerImage {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border: 3px solid aliceblue;
+  border-radius: 10px;
+}
+
+.Image {
+  max-height: 70vh;
+  max-width: 100%;
+  object-fit: contain;
+  border: 3px solid aliceblue
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #242a3d;
+  transition: color ease-in-out 0.3s;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:hover i {
+  color: aliceblue;
+  transition: color ease-in-out 0.3s;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+i {
+  color: aliceblue;
+  font-size: 1.6rem;
+  padding: 7px;
+  vertical-align: middle;
+}
+
+i:hover {
+  cursor: pointer;
+  transition: color ease-in-out 0.3s;
+  color: aliceblue;
+}
+
+figure {
+  text-align: center;
+  display: inline-block;
+}
+
+/* scrollbar */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
