@@ -5,7 +5,8 @@ import { Switch, Route } from 'react-router-dom';
 import './api/axiosDefaults'
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
-import ProfilesPage from './pages/profiles/ProfilePage'
+import ProfilesList from './pages/profiles/ProfilesList'
+import ProfilePage from './pages/profiles/ProfilePage'
 import ProfileEditForm from './pages/profiles/ProfileEditForm'
 
 
@@ -16,8 +17,9 @@ function App() {
       <Container className={styles.Main}>
         <Switch>
           <Route exact path="/" render={() => <h1>Home page</h1>} />
-          <Route exact path="/profiles" render={() => <ProfilesPage message="No results found" />} />
-          <Route exact path="/profiles/:id/edit" render={() => <ProfileEditForm /> } />
+          <Route exact path="/profiles" render={() => <ProfilesList message="No results found" />} />
+          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+          <Route exact path="/profiles/:id/edit" render={() => <ProfileEditForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route render={() => <p>Page not found!</p>} />

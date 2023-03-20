@@ -1,54 +1,41 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
-import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
-import styles from "../../styles/ProfilesPage.module.css";
+import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
+import Profile from "./Profile";
 
-function PostsPage({ message, filter = "" }) {
-  const [profiles, setProfiles] = useState({ results: [] })
-  const [hasLoaded, setHasLoaded] = useState(false)
+function ProfilePage() {
+  const { id } = useParams();
+  const [profile, setProfile] = useState({ results: [] });
 
   useEffect(() => {
-    const fetchProfiles = async () => {
+    const handleMount = async () => {
       try {
-        const {data} = await axiosReq.get(`/profiles/?${filter}`)
-        setProfiles(data)
-        setHasLoaded(true)
-      } catch(err){
-        console.log(err)
+        const [{ data: profile }] = await Promise.all([
+          axiosReq.get(`/profiles/${id}`),
+        ]);
+        setProfile({ results: [profile] });
+        console.log(profile);
+      } catch (err) {
+        console.log(err);
       }
-    }
+    };
 
-    setHasLoaded(false)
-    fetchProfiles()
-  }, [filter])
-  
+    handleMount();
+  }, [id]);
+
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles mobile</p>
-        {hasLoaded ? (
-          <>
-            {profiles.results.length ? (
-              console.log('map over profiles and render each one')
-            ) : (
-              console.log('show no results asset')
-            )}
-          </>
-        ) : (
-          console.log('show loading spinner')
-        )}
-      </Col>
-      <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        <p>Popular profiles for desktop</p>
+        <Profile {...profile.results[0]} setPosts={setProfile} />
       </Col>
     </Row>
   );
 }
 
-export default PostsPage;
+export default ProfilePage;

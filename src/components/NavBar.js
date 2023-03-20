@@ -35,11 +35,18 @@ const NavBar = () => {
             Find a sitter</NavLink>
         <NavLink
             className={styles.NavLink}
-            to={`/profiles/${currentUser?.profile_id}/edit`}
+            to={`/profiles/${currentUser?.profile_id}`}
             onClick={() => { }}
         >
             <i className="fa-solid fa-paw"></i>
             Profile</NavLink>
+            <NavLink
+            className={styles.NavLink}
+            to={`/profiles/${currentUser?.profile_id}/edit`}
+            onClick={() => { }}
+        >
+            <i className="fa-solid fa-paw"></i>
+            Edit Profile</NavLink>
         <NavLink
             className={styles.NavLink}
             to="/"

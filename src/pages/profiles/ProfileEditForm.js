@@ -15,6 +15,7 @@ import Asset from "../../components/Asset"
 import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
+import Alert from "react-bootstrap/Alert";
 
 function ProfileEditForm() {
   const [errors, setErrors] = useState({})
@@ -82,6 +83,11 @@ function ProfileEditForm() {
                 onChange={handleChange}
               />
             </Form.Group>
+            {errors?.username?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
 
             <Form.Group className="mb-3" controlId="dog_name">
               <Form.Label>Dog name</Form.Label>
@@ -92,6 +98,11 @@ function ProfileEditForm() {
                 onChange={handleChange}
               />
             </Form.Group>
+            {errors?.dog_name?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
 
             {/* <fieldset>
               <Form.Group as={Row} className="mb-3" controlId="preference">
@@ -125,10 +136,15 @@ function ProfileEditForm() {
               <Form.Label>Content</Form.Label>
               <Form.Control as="textarea" rows={6} name="content" />
             </Form.Group>
+            {errors?.content?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
 
             <Button
               className={`${btnStyles.Button} ${btnStyles.Blue}`}
-              onClick={() => { }}
+              onClick={() => history.goBack()}
             >
               cancel
             </Button>
