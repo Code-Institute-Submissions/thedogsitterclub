@@ -1,14 +1,14 @@
 .NavBar {
     font-size: large;
-    background-color: aliceblue
+    background-color: #254779
 }
 
 .NavLink {
     padding: 10px;
     text-decoration-line: none;
-    color: #242a3d;
+    color: #fff;
   }
 
-  .NavLink:hover{
-    color: #242a3d
+  .NavLink:hover {
+    color: #fff
   }

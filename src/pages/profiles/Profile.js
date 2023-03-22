@@ -1,40 +1,50 @@
 import React from "react";
-import styles from "../../styles/Profile.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Card, Media } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+import styles from '../../styles/Card.module.css'
 import { Link } from "react-router-dom";
-import Avatar from "../../components/Avatar";
-import { axiosRes } from "../../api/axiosDefaults";
+import btnStyles from "../../styles/Button.module.css";
+
 
 const Profile = (props) => {
     const {
-      id,
-      owner,
-      content,
-      image,
-      created_at,
-      updated_at,
+        owner,
+        content,
+        preference,
+        image,
+        created_at,
     } = props;
 
     const currentUser = useCurrentUser()
+    const is_owner = currentUser?.username === owner;
 
-    return <Card className={styles.Profile}>
-        <Card.Body>
-            <Media className="align-items-center justify-content-between">
-                <Link to={`/profiles/${id}`}>
-                    {owner}
-                </Link>
-                <div className="d-flex align-items-center">
-                    <span>Member since: {created_at}</span>
+    return (
+        <Card className={styles.card}>
+            <Card.Img className={styles.cardImage} src={image} />
+            <Card.Body>
+                <Card.Title>{owner}</Card.Title>
+                <Card.Text>
+                    {preference}
+                </Card.Text>
+                <Card.Text>
+                    {content}
+                </Card.Text>
+                <div className="d-flex justify-content-between">
+                    {is_owner ? (
+                        <Link to={`/profiles/${currentUser?.profile_id}/edit`}>
+                        <Button className={btnStyles.Button}>Edit profile</Button>
+                        </Link>
+                    ) : (
+                        <div>
+                            <Button className={btnStyles.Button}>Request to book</Button>
+                            <Button className={btnStyles.Button} variant="primary">View profile</Button>
+                        </div>
+                    )}
                 </div>
-            </Media>
-        </Card.Body>
-        <Card.Img src={image} alt="" />
-        <Card.Body>
-            {content && <Card.Text>{content}</Card.Text>}
-        </Card.Body>
-    </Card>
-
+            </Card.Body>
+            <Card.Footer className="d-flex align-content-end flex-wrap">{created_at}</Card.Footer>
+        </Card>
+    )
 }
 
 export default Profile

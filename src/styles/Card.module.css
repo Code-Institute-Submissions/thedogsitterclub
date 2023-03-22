@@ -1,0 +1,49 @@
+.card {
+  flex-direction: row;
+  margin-bottom: 20px;
+  border-color: #254779;
+  border-width: 3px;
+}
+
+/* .cardFooter {
+  
+} */
+
+/* .cardImage {
+  max-width: 200px;
+  max-height: 240px;
+} */
+
+.cardImage {
+  object-fit: cover;
+  width: 50vw;
+  height: 30vh;
+  max-width: 200px;
+  max-height: 240px;
+  }
+
+.Button {
+    background-color: #f9e45b;
+    border-color: transparent;
+    margin-right: 5px;
+}
+
+.Button:hover {
+    background-color: #f9e45b;
+    opacity: 0.8;
+    border-color: transparent;
+    cursor: pointer;
+  }
+
+@include media-breakpoint-down(md) {
+  .cardImage {
+    max-width: 100%;
+    max-height: 200px;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .card {
+    flex-direction: column;
+  }
+}

@@ -3,24 +3,13 @@
 }
 
 .Input {
-  background: aliceblue;
-  border: 1px solid #4887b1;
+  background: #99d6d3;
+  border: 1px solid #fff;
   box-sizing: border-box;
   border-radius: 10px;
   color: #242a3d;
   text-align: center;
   padding: 10px;
-}
-
-.Header {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: aliceblue;
 }
 
 .LinkText {
@@ -31,11 +20,11 @@
 }
 
 .LinkButton:hover {
-  color: aliceblue;
+  color: #1b4d89;
 }
 
 .Link span {
-  color: aliceblue;
+  color: #1b4d89;
 }
 
 .Container {

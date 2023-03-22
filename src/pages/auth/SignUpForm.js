@@ -5,8 +5,6 @@ import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
-import dogpic from "../../assets/dogpic.jpg"
-
 import {
     Form,
     Button,
@@ -51,7 +49,6 @@ const SignUpForm = () => {
         <Row className={styles.Row}>
             <Col className="my-auto py-2 p-md-2" md={6}>
                 <Container className={`${appStyles.Content} p-4 `}>
-                    <h1 className={styles.Header}>sign up</h1>
 
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-2" controlId="username">
@@ -129,7 +126,7 @@ const SignUpForm = () => {
             >
                 <Image
                     className={`${appStyles.FillerImage}`}
-                    src={dogpic}
+                    src={"https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"}
                 />
             </Col>
         </Row>
