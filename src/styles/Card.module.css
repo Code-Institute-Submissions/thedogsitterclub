@@ -1,38 +1,21 @@
 .card {
-  flex-direction: row;
   margin-bottom: 20px;
   border-color: #254779;
   border-width: 3px;
+  justify-content: center;
 }
 
-/* .cardFooter {
-  
-} */
-
-/* .cardImage {
-  max-width: 200px;
-  max-height: 240px;
-} */
+.cardContent {
+  display: flex;
+  align-items: center;
+}
 
 .cardImage {
   object-fit: cover;
-  width: 50vw;
-  height: 30vh;
-  max-width: 200px;
-  max-height: 240px;
-  }
-
-.Button {
-    background-color: #f9e45b;
-    border-color: transparent;
-    margin-right: 5px;
-}
-
-.Button:hover {
-    background-color: #f9e45b;
-    opacity: 0.8;
-    border-color: transparent;
-    cursor: pointer;
+  width: 60vw;
+  height: 40vh;
+  max-width: 220px;
+  max-height: 280px;
   }
 
 @include media-breakpoint-down(md) {

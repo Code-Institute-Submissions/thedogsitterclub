@@ -16,6 +16,7 @@ import { Image } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import Alert from "react-bootstrap/Alert";
+import {Switch} from 'antd'
 
 function ProfileEditForm() {
   const [errors, setErrors] = useState({})
@@ -23,13 +24,14 @@ function ProfileEditForm() {
   const [profileData, setProfileData] = useState({
     username: "",
     dog_name: "",
-    preference: "",
+    // preference: "",
+    available: false,
     content: "",
     image: ""
   })
-  const { username, dog_name, preference, content, image } = profileData
+  const { username, dog_name, content, available, image } = profileData
 
-  const [selectedOption, setSelectedOption] = useState("")
+  const [preference, setPreference] = useState("")
 
   const imageInput = useRef()
   const history = useHistory()
@@ -39,7 +41,7 @@ function ProfileEditForm() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/profiles/${id}/`)
-        const { username, dog_name, content, image, is_owner } = data
+        const { username, dog_name, preference, content, image, is_owner } = data
 
         is_owner ? setProfileData({ username, dog_name, preference, content, image }) : history.push('/')
       } catch (err) {
@@ -66,17 +68,23 @@ function ProfileEditForm() {
     }
   };
 
-  const handleChangePreference = (event) => {
-    setSelectedOption(event.target.value)
-    }
+  const [toggle, setToggle] = useState({
+    available: false
+  })
 
+  const handleClick = () => {toggle ? setToggle(false) : setToggle(true)}
+
+  // const handleChangePreference = (event) => {
+  //   setPreference(event.target.value)
+  //   }
+    
   const handleSubmit = async (event) => {
     event.preventDefault()
     const formData = new FormData()
 
     formData.append('username', username)
     formData.append('dog_name', dog_name)
-    formData.append('preference', selectedOption)
+    formData.append('preference', preference)
     formData.append('content', content)
 
 
@@ -130,9 +138,9 @@ function ProfileEditForm() {
               </Alert>
             ))}
 
-            <Form.Group className="mb-3" controlId="preference">
+            {/* <Form.Group className="mb-3" controlId="preference">
               <Form.Label>I'm looking for</Form.Label>
-              <Form.Control as="select" value={selectedOption} onChange={handleChangePreference}>
+              <Form.Control as="select" value={preference} onChange={handleChangePreference}>
                 <option>Select one</option>
                 <option
                   type="radio"
@@ -153,7 +161,11 @@ function ProfileEditForm() {
                   value="BOTH"
                 >Three</option>
               </Form.Control>
-            </Form.Group>
+            </Form.Group> */}
+
+            <div>
+             <Switch value={available} onClick={handleClick} />
+            </div>
 
             <Form.Group className="mb-3" controlId="content">
               <Form.Label>Content</Form.Label>
@@ -220,32 +232,6 @@ function ProfileEditForm() {
                 ref={imageInput}
               />
             </Form.Group>
-            {/* <Form.Group>
-              {image && (
-                <figure>
-                  <Image src={image} fluid />
-                </figure>
-              )}
-              {errors?.image?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
-              <div>
-                <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.Blue} btn my-auto`}
-                  htmlFor="image-upload"
-                >
-                  Change the image
-                </Form.Label>
-              </div>
-              <Form.File
-                id="image-upload"
-                ref={imageInput}
-                accept="image/*"
-                onChange={handleChangeImage}
-              />
-            </Form.Group> */}
           </Container>
         </Col>
       </Row>
