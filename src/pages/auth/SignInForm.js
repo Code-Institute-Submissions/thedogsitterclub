@@ -37,6 +37,7 @@ function SignInForm() {
     try {
       const {data} = await axios.post('/dj-rest-auth/login/', signInData)
       console.log(data)
+      localStorage.setItem('user', JSON.stringify(data))
       setCurrentUser(data.user)
       history.push("/")
     } catch (err) {

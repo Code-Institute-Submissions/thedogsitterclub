@@ -24,14 +24,11 @@ function ProfileEditForm() {
   const [profileData, setProfileData] = useState({
     username: "",
     dog_name: "",
-    // preference: "",
     available: false,
     content: "",
     image: ""
   })
   const { username, dog_name, content, available, image } = profileData
-
-  const [preference, setPreference] = useState("")
 
   const imageInput = useRef()
   const history = useHistory()
@@ -41,16 +38,16 @@ function ProfileEditForm() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/profiles/${id}/`)
-        const { username, dog_name, preference, content, image, is_owner } = data
+        const { username, dog_name, available, content, image, is_owner } = data
 
-        is_owner ? setProfileData({ username, dog_name, preference, content, image }) : history.push('/')
+        is_owner ? setProfileData({ username, dog_name, available, content, image }) : history.push('/')
       } catch (err) {
         console.log(err)
       }
     }
 
     handleMount()
-  }, [history, id, preference])
+  }, [history, id, available])
 
   const handleChange = (event) => {
     setProfileData({
@@ -72,19 +69,15 @@ function ProfileEditForm() {
     available: false
   })
 
-  const handleClick = () => {toggle ? setToggle(false) : setToggle(true)}
+  const handleClick = () => {setToggle(!toggle)}
 
-  // const handleChangePreference = (event) => {
-  //   setPreference(event.target.value)
-  //   }
-    
   const handleSubmit = async (event) => {
     event.preventDefault()
     const formData = new FormData()
 
     formData.append('username', username)
     formData.append('dog_name', dog_name)
-    formData.append('preference', preference)
+    formData.append('available', available)
     formData.append('content', content)
 
 
@@ -138,35 +131,12 @@ function ProfileEditForm() {
               </Alert>
             ))}
 
-            {/* <Form.Group className="mb-3" controlId="preference">
-              <Form.Label>I'm looking for</Form.Label>
-              <Form.Control as="select" value={preference} onChange={handleChangePreference}>
-                <option>Select one</option>
-                <option
-                  type="radio"
-                  label="Dogsitter"
-                  name="Dogsitter"
-                  value="DOGSITTER"
-                >One</option>
-                <option
-                  type="radio"
-                  label="Dogsitting"
-                  name="Dogsitting"
-                  value="DOGSITTING"
-                >Two</option>
-                <option
-                  type="radio"
-                  label="Both"
-                  name="Both"
-                  value="BOTH"
-                >Three</option>
-              </Form.Control>
-            </Form.Group> */}
-
-            <div>
-             <Switch value={available} onClick={handleClick} />
-            </div>
-
+            <Form.Group className="mb-3" controlId="available">
+              <Form.Label>Available</Form.Label>
+              <br/>
+              <Switch className={styles.Toggle} value={available} onClick={handleClick} />
+            </Form.Group>
+          
             <Form.Group className="mb-3" controlId="content">
               <Form.Label>Content</Form.Label>
               <Form.Control

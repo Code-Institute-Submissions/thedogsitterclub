@@ -8,6 +8,7 @@ import btnStyles from "../../styles/Button.module.css";
 
 const Profile = (props) => {
     const {
+        id,
         owner,
         dog_name,
         content,
@@ -30,7 +31,7 @@ const Profile = (props) => {
                         <h4 className="card-title">{owner}</h4>
                         <p className="card-text">My dog's name is: <strong>{dog_name}</strong></p>
                         <p className="card-text">{content}</p>
-                        <p className="card-text">{available}</p>
+                        <p className="card-text">Available: {available}</p>
                         <div>
                             {is_owner ? (
                                 <Link to={`/profiles/${currentUser?.profile_id}/edit`}>
@@ -38,9 +39,12 @@ const Profile = (props) => {
                                 </Link>
                             ) : (
                                 <div>
-                                    
-                                    <Button className={btnStyles.Button}>Request to book</Button>
-                                    <Button className={btnStyles.Button} variant="primary">View profile</Button>
+                                    <Link to="/bookings/create">
+                                        <Button className={btnStyles.Button}>Request to book</Button>
+                                    </Link>
+                                    <Link to={`/profiles/${id}`}>
+                                        <Button className={btnStyles.Button} variant="primary">View profile</Button>
+                                    </Link>
                                 </div>
                             )}
                         </div>

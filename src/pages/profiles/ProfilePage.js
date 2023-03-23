@@ -28,7 +28,7 @@ function ProfilePage() {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <Profile {...profile.results[0]} setPosts={setProfile} />
+        <Profile {...profile.results[0]} />
       </Col>
     </Row>
   );

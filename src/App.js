@@ -8,6 +8,7 @@ import SignInForm from './pages/auth/SignInForm';
 import ProfilesList from './pages/profiles/ProfilesList'
 import ProfilePage from './pages/profiles/ProfilePage'
 import ProfileEditForm from './pages/profiles/ProfileEditForm'
+import BookingCreateForm from './pages/bookings/BookingCreateForm';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/profiles/:id/edit" render={() => <ProfileEditForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
+          <Route exaxt path="/bookings/create" render={() => <BookingCreateForm />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
