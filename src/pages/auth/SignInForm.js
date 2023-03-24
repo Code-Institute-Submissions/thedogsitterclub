@@ -39,7 +39,7 @@ function SignInForm() {
       console.log(data)
       localStorage.setItem('user', JSON.stringify(data))
       setCurrentUser(data.user)
-      history.push("/")
+      history.push("/profiles")
     } catch (err) {
       setErrors(err.response?.data)
     }

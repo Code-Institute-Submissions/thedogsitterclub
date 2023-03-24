@@ -88,13 +88,7 @@ const NavBar = () => {
                 />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="justify-content-end flex-grow-1 pe-3">
-                        <NavLink
-                            className={styles.NavLink}
-                            activeClassName={styles.Active}
-                            to="/"
-                        >
-                            <i className="fa-solid fa-person-shelter"></i>
-                            Home</NavLink>
+                        
                         {currentUser ? loggedInIcons : loggedOutIcons}
                     </Nav>
                 </Navbar.Collapse>

@@ -1,0 +1,15 @@
+.Row {
+    height: calc(100vh - 81px);
+  }
+
+.Button {
+    padding: 10px 50px;
+    width: 30%;
+}
+
+.Image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border: 3px solid #f6c453
+  }

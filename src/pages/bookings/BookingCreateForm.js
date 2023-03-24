@@ -8,9 +8,9 @@ import Alert from "react-bootstrap/Alert";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-function BookingCreateForm(props) {
+function BookingCreateForm() {
 
-    const { id } = useParams();
+    // const { id } = useParams();
 
     const [errors, setErrors] = useState()
 
@@ -50,7 +50,7 @@ function BookingCreateForm(props) {
             console.log('user data ===', data);
             axiosReq.defaults.headers.common['Authorization'] = `Bearer ${data?.access_token}`;
             // await axiosReq.post(`/bookings/${data.id}`, formData)
-            await axiosReq.post(`/bookings`, formData)
+            await axiosReq.post(`/bookings/`, formData)
             // history.push(`/bookings/${data.id}`)
             // history.push(`/profiles/`)
         } catch (err) {

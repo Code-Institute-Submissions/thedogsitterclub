@@ -40,7 +40,7 @@ const Profile = (props) => {
                                 </Link>
                             ) : (
                                 <div>
-                                    <Link to="/bookings/create">
+                                    <Link to={`/bookings/${id}/create`}>
                                         <Button className={btnStyles.Button}>Request to book</Button>
                                     </Link>
                                     <Link to={`/profiles/${id}`}>

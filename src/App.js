@@ -25,8 +25,8 @@ function App() {
           <Route exact path="/profiles/:id/edit" render={() => <ProfileEditForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
-          <Route exact patg="bookings" render={() => <BookingsPage />} />
-          <Route exaxt path="/bookings/create" render={() => <BookingCreateForm />} />
+          <Route exact patg="/bookings" render={() => <BookingsPage />} />
+          <Route exaxt path="/bookings/:id/create" render={() => <BookingCreateForm />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
