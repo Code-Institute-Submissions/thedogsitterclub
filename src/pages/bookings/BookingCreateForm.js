@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults'
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
@@ -8,9 +8,9 @@ import Alert from "react-bootstrap/Alert";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const BookingCreateForm = (props) => {
+function BookingCreateForm(props) {
 
-    const { name } = props
+    const { id } = useParams();
 
     const [errors, setErrors] = useState()
 
@@ -45,13 +45,14 @@ const BookingCreateForm = (props) => {
 
         console.log('booking form data ===', bookingData);
 
-
         try {
             const data = await localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
             console.log('user data ===', data);
             axiosReq.defaults.headers.common['Authorization'] = `Bearer ${data?.access_token}`;
-            await axiosReq.post('/bookings/', formData)
-            history.push(`/profiles/`)
+            // await axiosReq.post(`/bookings/${data.id}`, formData)
+            await axiosReq.post(`/bookings`, formData)
+            // history.push(`/bookings/${data.id}`)
+            // history.push(`/profiles/`)
         } catch (err) {
             console.log(err)
             if (err.response?.status !== 401) {

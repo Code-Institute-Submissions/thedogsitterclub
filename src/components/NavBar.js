@@ -40,6 +40,13 @@ const NavBar = () => {
         >
             <i className="fa-solid fa-paw"></i>
             Profile</NavLink>
+            <NavLink
+            className={styles.NavLink}
+            to={'/bookings'}
+            onClick={() => { }}
+        >
+            <i className="fa-solid fa-paw"></i>
+            Bookings</NavLink>
         <NavLink
             className={styles.NavLink}
             to="/"

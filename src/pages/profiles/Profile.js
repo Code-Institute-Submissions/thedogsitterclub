@@ -10,6 +10,7 @@ const Profile = (props) => {
     const {
         id,
         owner,
+        username,
         dog_name,
         content,
         available,
@@ -28,7 +29,7 @@ const Profile = (props) => {
                 </div>
                 <div className={`${styles.cardContent} col`}>
                     <div className="card-block px-2">
-                        <h4 className="card-title">{owner}</h4>
+                        <h4 className="card-title">{username}</h4>
                         <p className="card-text">My dog's name is: <strong>{dog_name}</strong></p>
                         <p className="card-text">{content}</p>
                         <p className="card-text">Available: {available}</p>

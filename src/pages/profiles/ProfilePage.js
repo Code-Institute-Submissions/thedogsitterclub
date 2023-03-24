@@ -30,6 +30,9 @@ function ProfilePage() {
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <Profile {...profile.results[0]} />
       </Col>
+      <Col>
+        <h1>Reviews</h1>
+      </Col>
     </Row>
   );
 }
