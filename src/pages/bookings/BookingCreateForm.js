@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
-import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults'
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
@@ -8,7 +8,7 @@ import Alert from "react-bootstrap/Alert";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-function BookingCreateForm() {
+function BookingCreateForm(props) {
 
     // const { id } = useParams();
 
@@ -18,9 +18,11 @@ function BookingCreateForm() {
         comment: "",
         start: "",
         end: "",
-        status: ""
+        status: "PENDING",
+        client: 1,
+        provider: 1
     })
-    const { comment, start, end, status } = bookingData
+    const { comment, start, end, status, client, provider } = bookingData
 
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
@@ -42,6 +44,8 @@ function BookingCreateForm() {
         formData.append('start', start)
         formData.append('end', end)
         formData.append('status', status)
+        formData.append('client', client)
+        formData.append('provider', provider)
 
         console.log('booking form data ===', bookingData);
 
@@ -49,8 +53,7 @@ function BookingCreateForm() {
             const data = await localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
             console.log('user data ===', data);
             axiosReq.defaults.headers.common['Authorization'] = `Bearer ${data?.access_token}`;
-            // await axiosReq.post(`/bookings/${data.id}`, formData)
-            await axiosReq.post(`/bookings/`, formData)
+            await axiosReq.post(`/bookings`, formData)
             // history.push(`/bookings/${data.id}`)
             // history.push(`/profiles/`)
         } catch (err) {
@@ -65,7 +68,7 @@ function BookingCreateForm() {
         <Form onSubmit={handleSubmit}>
             <Row>
                 <Col className="py-2 p-0 p-md-2" md={7} lg={6}>
-                    <Container className={appStyles.Content}>
+                    <Container>
                         <Form.Group className="mb-3" controlId="comment">
                             <Form.Label>Comment</Form.Label>
                             <Form.Control
@@ -90,9 +93,11 @@ function BookingCreateForm() {
                                     setSelectedStartDate(date);
                                     setBookingData({
                                         comment,
-                                        start: date,
+                                        start: date.toISOString().slice(0, 10),
                                         end,
-                                        status: ""
+                                        status: "PENDING",
+                                        client: 1,
+                                        provider: 1
                                     })
                                 }}
                                 dateFormat='dd/MM/yyyy'
@@ -112,11 +117,14 @@ function BookingCreateForm() {
                                 selected={selectedEndDate}
                                 onChange={date => {
                                     setSelectedEndDate(date);
+                                    console.log('end date ===', date.toISOString().slice(0, 10));
                                     setBookingData({
                                         comment,
                                         start,
-                                        end: date,
-                                        status: ""
+                                        end: date.toISOString().slice(0, 10),
+                                        status: "PENDING",
+                                        client: 1,
+                                        provider: 1
                                     })
                                 }}
                                 dateFormat='dd/MM/yyyy'

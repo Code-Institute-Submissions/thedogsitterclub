@@ -86,4 +86,27 @@ I set to create a simple app that anyone who has a dog can engage with, providin
 
 - **Profiles page** - The profiles page features a list of all profiles registered with the app. Each profile is contained in a card and includes all of that profile's information. Each profile card has a button that will link to that profile's page, and also a button to request to book. Profiles are ordered so that the last created or profile will appear on the top of the list. 
 
-- **Profile page** - On the the profile page, you can see the same information as on the profiles page, along with any reviews that user might have received. From the profile page you'll also be able to request a booking. 
+- **Profile page** - Viewing another user's profile page, the user will be able to see the same information as on the profiles page, along with any reviews they might have received. From the profile page you'll also be able to request a booking. Viewing their own profile page, the user will also see button with a link to edit their profile information and image.
+
+- **Bookings page** - Here the user will see a clear overview of their bookings, and they'll be able to edit or cancel their booking.
+
+- **Alerts** - I implemented flexible alerts using the Bootstrap toolkit to provide contextual feedback to users whenever they perform an action for which feedback might be appreciated, or when an error occurs. For example, if a user logs in or creates/deletes a booking, or when they try to log in with an empty form field. the appropriate notification will appear.
+
+- **Features to implement** - 
+
+## Testing
+
+### Lighthouse testing
+
+I ran Lighthouse tests on Chrome to check the performance, quality and correctness of this web app. I generated reports for mobile and desktop devices which gave the following results;
+
+## Desktop
+
+## Mobile
+
+### CSS testing
+
+### JavaScript testing
+
+### Python testing
+

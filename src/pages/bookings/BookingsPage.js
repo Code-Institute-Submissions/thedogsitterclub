@@ -1,41 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Card } from 'react-bootstrap'
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import BookingCreateForm from "./BookingCreateForm"
 
 function BookingsPage() {
+
   const { id } = useParams();
-  const [booking, setBooking] = useState({ results: [] });
+  const [bookings, setBookings] = useState({ results: [] });
 
   useEffect(() => {
-    const handleMount = async () => {
+    const fetchBookings = async () => {
       try {
-        const [{ data: booking }] = await Promise.all([
-          axiosReq.get(`/booking/${id}`),
-        ]);
-        setBooking({ results: [booking] });
-        console.log(booking);
+        const {data} = await axiosReq.get('/bookings/');
+        setBookings(data);
       } catch (err) {
         console.log(err);
       }
-    };
-    handleMount();
-  }, [id]);
+    }})
+  
 
   return (
-    <div>
-      <Card>
-      <Card.Header>Booking Owner</Card.Header>
-      <Card.Body>
-        <Card.Title>Booking owner dog name</Card.Title>
-        <Card.Text>
-          Booking date
-        </Card.Text>
-        <Button variant="primary">Edit booking</Button>
-      </Card.Body>
-    </Card>
-    </div>
+    <Row className="h-100">
+      <Col className="py-2 p-0 p-lg-2" lg={8}>
+        Booking
+      </Col>
+      <Col>
+      </Col>
+    </Row>
   )
 }
 

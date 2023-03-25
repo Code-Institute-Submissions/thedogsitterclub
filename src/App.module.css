@@ -11,13 +11,14 @@
 .Content {
   padding: 10px;
   border-radius: 2px;
+  color: #black;
 }
 
 .FillerImage {
   object-fit: cover;
   height: 100%;
   width: 100%;
-  border: 3px solid #f0a04b;
+  border: 3px solid #f6c453;
   border-radius: 10px;
 }
 
