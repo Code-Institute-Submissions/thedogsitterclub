@@ -1,6 +1,6 @@
 # The Dogsitter Club
 
-The Dogsitter club is a platform where dog owners can request dogsitters to dogsit their dogs.
+The Dogsitter club is a platform where dog owners can share informations about themselves and request dogsitters to dogsit their dogs. Users are able to leave to reviews on other users' profiles once they have at least one booking. 
 
 # UX
 
@@ -34,7 +34,7 @@ I considered how this software application may be useful to a user before beginn
 
 ### The Bookings Page
 
-1. As a **user** I can *fill in a booking request form and target it to a specific user* so that **they can receive the booking request**.
+1. As a **user** I can **fill in a booking request form and target it to a specific user** so that **they can receive the booking request**.
 2. As a **user** I can **have a clear oversight of my bookings** so that **I can check their status and dates**. 
 3. As a **user** I can **cancel my booking request** so that the **booking will be cancelled if it's no longer required**.
 
@@ -110,3 +110,99 @@ I ran Lighthouse tests on Chrome to check the performance, quality and correctne
 
 ### Python testing
 
+
+| Function| Test case | Result |                                                          
+|---------|-----------|--------|
+| Sign up form | Form checks if username exists | Pass
+| Sign up form | Form checks if username is valid | Pass
+| Sign up form | Form checks if password is valid | Pass
+| Sign up form | Form checks if both password fields match | Pass
+| Sign up form | User successfully signed up | Pass
+| Sign in form | Form checks if username exists | Pass
+| Sign in form | Form checks if password is correct | Pass
+| Navigation | Nav bar accessible on every page | Pass
+| Navigation | Search bar for keyword search | Pass
+| Profiles page | Display all profiles | Pass
+| Profiles page | Profiles are ordered by date created | Pass
+| Profile page | Profile page loads | Pass
+| Bookings | Booking form loads | Pass
+| Bookings | Booking form validates input fields and dislays alerts | Pass
+| Bookings | Booking is sent on submit | Pass
+| Reviews | Reviews are available once a booking has been accepted | Pass
+| Reviews | Reviews are displayed on profile page | Pass
+| Reviews | Review can be edited or deleted by author | Pass
+| Logout | User can logout | Pass
+
+# DRF API
+
+
+## Deployment
+
+### Front end
+
+After creating a React app on gitpod, I set up an initial deployment on Heroku, which is a cloud application platform for developers to build, run and operate their applications.;
+
+1. Log into Heroku.com and select 'Create new app' on user dashboard.
+2. Choose a name and closest region and click 'Create app'.
+3. Navigate to the “Deploy” tab of my app.
+4. In the deployment method section, select 'Connect to GitHub'.
+5. Search for my repo and click 'Connect'.
+6. I enabled 'Automatic Deploys' so that every push to the main branch will deploy a new version of the app.
+8. Click 'Deploy branch' to start the build process.
+
+### Back end
+
+As Heroku is no longer offering multiple free databases to their free tier users, I used a separate free database service called ElephantSQL to host my PostgreSQL database. First I created my ElephantSQL account;
+
+1. Navigate to the ElephantSQL website and click 'Get a managed database today'.
+2. Select 'Try now for FREE' in the TINY TURTLE database plan.
+3. Select 'Log in with GitHub' and authorize ElephantSQL with my selected GitHub account
+4. Create a new team. (I am the team!)
+
+After setting up my account, I created the database;
+
+1. In the top right-hand corner of my account dashboard, click 'Create New Instance'
+2. Set up my plan.
+3. Select region and data center.
+4. Click 'Review'
+5. Check details and click 'Create instance'
+6. Return to the ElephantSQL dashboard and click on the database instance name for my project.
+7. In the URL section, click the copy icon to copy the database URL to my clipboard.
+
+After creating the database and configuring my Gitpod code for Heroku, I was ready to deploy my project. I already had a Heroku account from a previous project, so setting up for deployment was next;
+
+1. Log into Heroku.com and select 'Create new app' on user dashboard.
+2. Choose a name and closest region and click 'Create app'.
+3. Go to the settings tab of my app.
+4. Click 'Reveal Config Vars'.
+5. Copy the database URL from ElephantSQL.
+6. Add a Config Var called 'DATABASE_URL' and paste my ElephantSQL database URL in as the value, click 'Add'.
+7. Add each of my other environment variables except DEVELOPMENT and DB_URL from the env.py file as a config var.
+
+Ready for deployment;
+
+1. Navigate to the “Deploy” tab of my app.
+2. In the deployment method section, select 'Connect to GitHub'.
+3. Search for my repo and click 'Connect'.
+4. I enabled 'Automatic Deploys' so that every push to the main branch will deploy a new version of the app.
+5. DEBUG mode set to 'False'.
+6. Click 'Deploy branch' to start the build process.
+
+## Credits
+
+### Content
+
+- [Balsamiq](https://balsamiq.com) for wireframes.
+- [Lucidchart](https://www.lucidchart.com) for entity relationship model.
+- [StackOverflow](https://stackoverflow.com) for help with code-related issues.
+- [Bootstrap](https://getbootstrap.com) for app layout and components.
+- [Bootstrap](https://react-bootstrap.github.io/) for styling.
+- [Heroku](https://dashboard.heroku.com/apps) for cloud platform.
+- [ElephantSQL](https://www.elephantsql.com/) for hosting the database.
+- [Code Institute](https://learn.codeinstitute.net/dashboard) for course material.
+
+### Media
+
+- [Pexels.com](https://www.pexels.com/) for images.
+- [Google Fonts](https://fonts.google.com/knowledge) for the 'Roboto' font.
+- [Font Awesome](https://fontawesome.com/) for icons.
