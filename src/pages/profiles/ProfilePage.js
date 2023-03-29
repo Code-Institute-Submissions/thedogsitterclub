@@ -63,13 +63,17 @@ function ProfilePage() {
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         {hasLoaded ? (<Profile {...profile} />) : (<Asset spinner />)}
+
+      </Col>
+
+      <Col className="py-2 p-0 p-lg-2" lg={4}>
         <Container>
-        {hasLoaded && isOwner && reviews.length > 0 ? reviews.map(review => (
+          {hasLoaded && isOwner && reviews.length > 0 ? reviews.map(review => (
             <Col md="auto" className="mt-2 mb-1" key={review.id}>
               <Review review={review} />
             </Col>
           )) : (<span>no review data</span>)
-       }
+          }
         </Container>
       </Col>
     </Row>

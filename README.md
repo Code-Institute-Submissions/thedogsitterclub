@@ -190,6 +190,10 @@ Ready for deployment;
 
 ## Credits
 
+### Code
+
+ Thank you to Devspeed Vision who supported me on Slack with various coding issues. 
+
 ### Content
 
 - [Balsamiq](https://balsamiq.com) for wireframes.
@@ -200,6 +204,7 @@ Ready for deployment;
 - [Heroku](https://dashboard.heroku.com/apps) for cloud platform.
 - [ElephantSQL](https://www.elephantsql.com/) for hosting the database.
 - [Code Institute](https://learn.codeinstitute.net/dashboard) for course material.
+
 
 ### Media
 
