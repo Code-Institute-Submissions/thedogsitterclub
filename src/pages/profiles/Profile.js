@@ -13,7 +13,6 @@ const Profile = (props) => {
         username,
         dog_name,
         content,
-        available,
         image,
         created_at,
     } = props;
@@ -32,7 +31,6 @@ const Profile = (props) => {
                         <h4 className="card-title">{username}</h4>
                         <p className="card-text">My dog's name is: <strong>{dog_name}</strong></p>
                         <p className="card-text">{content}</p>
-                        <p className="card-text">Available: {available}</p>
                         <div>
                             {is_owner ? (
                                 <Link to={`/profiles/${currentUser?.profile_id}/edit`}>

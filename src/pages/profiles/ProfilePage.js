@@ -1,58 +1,75 @@
 import { useState, useEffect } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+
+import Asset from "../../components/Asset";
+import Review from "../reviews/Review";
+
 
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Profile from "./Profile";
 
-import Booking from "../bookings/Booking";
-import BookingCreateForm from "../bookings/BookingCreateForm"
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Container } from "react-bootstrap";
-
-function ProfilePage(owner) {
+function ProfilePage() {
   const currentUser = useCurrentUser()
-  // const is_owner = currentUser?.username === owner;
-
   const { id } = useParams();
-  const [bookings, setBookings] = useState({results: []})
-  const [profile, setProfile] = useState({ results: [] });
+  const [profile, setProfile] = useState(null);
+  const [reviews, setReviews] = useState([])
+  const [hasLoaded, setHasLoaded] = useState(false)
+  const [isOwner, setIsOwner] = useState(false)
 
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const [{ data: profile }, { data: bookings }] = await Promise.all([
-          axiosReq.get(`/profiles/${id}`),
-          axiosReq.get(`/bookings/?profile=${id}`),
-        ]);
-        setProfile({ results: [profile] });
-        setBookings(bookings)
+        axiosReq.get(`/profiles/${id}`).then((res) => {
+          setHasLoaded(true)
+          if (res.data) {
+            setProfile(res.data)
+          }
+        })
       } catch (err) {
+        setHasLoaded(false)
         console.log(err);
       }
     };
     handleMount();
   }, [id]);
 
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const { data } = await axiosReq.get('/reviews')
+        if (data && data.length) {
+          setHasLoaded(true)
+          setReviews(data)
+        }
+      } catch (err) {
+        console.log(err)
+        setHasLoaded(false)
+        setReviews([])
+      }
+    }
+    fetchReviews()
+    if (currentUser && (currentUser.pk === id)) {
+      setIsOwner(true)
+    } else {
+      setIsOwner(false)
+    }
+  }, [currentUser, id])
+
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <Profile {...profile.results[0]} />
+        {hasLoaded ? (<Profile {...profile} />) : (<Asset spinner />)}
         <Container>
-          {currentUser ? (
-            <BookingCreateForm />
-          ) : ( bookings.results.length ? (
-            bookings.results.map((booking) => (
-              <Booking key={bookings.id} {...booking}/>
-            ))
-          ) : currentUser ? (
-            <span>No bookings yet</span>
-          ) : (
-            <span>No bookings yes</span>
-          )
-
-          )}
+        {hasLoaded && isOwner && reviews.length > 0 ? reviews.map(review => (
+            <Col md="auto" className="mt-2 mb-1" key={review.id}>
+              <Review review={review} />
+            </Col>
+          )) : (<span>no review data</span>)
+       }
         </Container>
       </Col>
     </Row>

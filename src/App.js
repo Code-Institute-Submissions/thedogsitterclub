@@ -10,6 +10,7 @@ import ProfilePage from './pages/profiles/ProfilePage'
 import ProfileEditForm from './pages/profiles/ProfileEditForm'
 import BookingsPage from './pages/bookings/BookingsPage';
 import HomePage from './pages/home/HomePage';
+import BookingCreateForm from './pages/bookings/BookingCreateForm';
 
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
           <Route exact path="/profiles/:id/edit" render={() => <ProfileEditForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
-          <Route exact patg="/bookings/" render={() => <BookingsPage />} />
+          <Route exact path="/bookings" render={() => <BookingsPage />} />
+          <Route exact path="/bookings/:id/create" render={() => <BookingCreateForm />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>

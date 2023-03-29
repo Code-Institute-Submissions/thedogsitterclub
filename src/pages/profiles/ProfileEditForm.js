@@ -16,7 +16,6 @@ import { Image } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import Alert from "react-bootstrap/Alert";
-import {Switch} from 'antd'
 
 function ProfileEditForm() {
   const [errors, setErrors] = useState({})
@@ -24,11 +23,10 @@ function ProfileEditForm() {
   const [profileData, setProfileData] = useState({
     username: "",
     dog_name: "",
-    available: false,
     content: "",
     image: ""
   })
-  const { username, dog_name, content, available, image } = profileData
+  const { username, dog_name, content, image } = profileData
 
   const imageInput = useRef()
   const history = useHistory()
@@ -47,7 +45,7 @@ function ProfileEditForm() {
     }
 
     handleMount()
-  }, [history, id, available])
+  }, [history, id])
 
   const handleChange = (event) => {
     setProfileData({
@@ -65,19 +63,12 @@ function ProfileEditForm() {
     }
   };
 
-  const [toggle, setToggle] = useState({
-    available: false
-  })
-
-  const handleClick = () => {setToggle(!toggle)}
-
   const handleSubmit = async (event) => {
     event.preventDefault()
     const formData = new FormData()
 
     formData.append('username', username)
     formData.append('dog_name', dog_name)
-    formData.append('available', available)
     formData.append('content', content)
 
 
@@ -130,12 +121,6 @@ function ProfileEditForm() {
                 {message}
               </Alert>
             ))}
-
-            <Form.Group className="mb-3" controlId="available">
-              <Form.Label>Available</Form.Label>
-              <br/>
-              <Switch className={styles.Toggle} value={available} onClick={handleClick} />
-            </Form.Group>
           
             <Form.Group className="mb-3" controlId="content">
               <Form.Label>Content</Form.Label>

@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { axiosReq } from '../../api/axiosDefaults'
 import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
 import Alert from "react-bootstrap/Alert";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
-function BookingCreateForm(props) {
 
-    // const { id } = useParams();
+function BookingCreateForm() {
+
+    const { id } = useParams()
+    const currentUser = useCurrentUser()
 
     const [errors, setErrors] = useState()
 
@@ -19,9 +21,10 @@ function BookingCreateForm(props) {
         start: "",
         end: "",
         status: "PENDING",
-        client: 1,
-        provider: 1
+        client: currentUser && currentUser.pk,
+        provider: id,
     })
+
     const { comment, start, end, status, client, provider } = bookingData
 
     const [selectedStartDate, setSelectedStartDate] = useState(null);
@@ -47,15 +50,12 @@ function BookingCreateForm(props) {
         formData.append('client', client)
         formData.append('provider', provider)
 
-        console.log('booking form data ===', bookingData);
-
         try {
             const data = await localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
             console.log('user data ===', data);
             axiosReq.defaults.headers.common['Authorization'] = `Bearer ${data?.access_token}`;
             await axiosReq.post(`/bookings`, formData)
-            // history.push(`/bookings/${data.id}`)
-            // history.push(`/profiles/`)
+            history.push('/bookings')
         } catch (err) {
             console.log(err)
             if (err.response?.status !== 401) {
@@ -92,12 +92,8 @@ function BookingCreateForm(props) {
                                 onChange={date => {
                                     setSelectedStartDate(date);
                                     setBookingData({
-                                        comment,
-                                        start: date.toISOString().slice(0, 10),
-                                        end,
-                                        status: "PENDING",
-                                        client: 1,
-                                        provider: 1
+                                        ...bookingData,
+                                        start: date.toISOString().slice(0, 10)
                                     })
                                 }}
                                 dateFormat='dd/MM/yyyy'
@@ -117,14 +113,9 @@ function BookingCreateForm(props) {
                                 selected={selectedEndDate}
                                 onChange={date => {
                                     setSelectedEndDate(date);
-                                    console.log('end date ===', date.toISOString().slice(0, 10));
                                     setBookingData({
-                                        comment,
-                                        start,
-                                        end: date.toISOString().slice(0, 10),
-                                        status: "PENDING",
-                                        client: 1,
-                                        provider: 1
+                                        ...bookingData,
+                                        end: date.toISOString().slice(0, 10)
                                     })
                                 }}
                                 dateFormat='dd/MM/yyyy'

@@ -1,15 +1,15 @@
 import React from 'react'
-import { Col, Container, Row, Button, Image } from 'react-bootstrap'
+import { Col, Container, Row, Button } from 'react-bootstrap'
 import homepage from "../../assets/homepage.jpg"
 import styles from "../../styles/HomePage.module.css"
 import btnStyles from "../../styles/Button.module.css";
-import { useCurrentUser, useSetCurrentUser } from '../../contexts/CurrentUserContext';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { Link } from 'react-router-dom';
 
 
 function HomePage() {
     const currentUser = useCurrentUser()
-    const setCurrentUser = useSetCurrentUser()
+
     return (
         <Row className={styles.Row}>
             <Col className="my-auto py-2 p-md-2" xs={12} sm={8}>
